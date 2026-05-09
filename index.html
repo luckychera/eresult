@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Student Result View System | eResult Portal</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description"
+    content="Student Result Viewing System - access marks, grades, academic performance online" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- CSS Links (preserved from original, functional for layout) -->
+  <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css" />
+  <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+  <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+  <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css" />
+  <link href="plugins/video-js/video-js.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="styles/main_styles.css" />
+  <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+  <style>
+    /* additional tweaks for result system integration */
+    .result-card-placeholder {
+      background: rgba(255, 255, 240, 0.92);
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .result-badge {
+      background: #2b7a62;
+      color: white;
+      font-weight: 600;
+      padding: 5px 15px;
+      border-radius: 40px;
+      display: inline-block;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+    }
+
+    .grade-highlight {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e5a4b;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+      padding: 30px 25px;
+    }
+
+    .btn-result-primary {
+      background: #2b7a62;
+      border: none;
+      transition: 0.2s;
+    }
+
+    .btn-result-primary:hover {
+      background: #1f5f4b;
+      transform: translateY(-2px);
+    }
+
+    .footer a,
+    .footer_contact_line {
+      font-size: 14px;
+    }
+
+    .home_slider_background:after {
+      background: rgba(0, 0, 0, 0.4);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="super_container">
+    <!-- Header -->
+    <header class="header">
+      <!-- Top Bar -->
+      <div class="top_bar">
+        <div class="top_bar_container">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                  <ul class="top_bar_contact_list">
+                    <li>
+                      <div class="question">Student Help desk?</div>
+                    </li>
+                    <li>
+                      <div>+251 911 223 344</div>
+                    </li>
+                    <li>
+                      <div>support@eresult.edu.et</div>
+                    </li>
+                  </ul>
+                  <div class="top_bar_login ml-auto">
+                    <ul>
+                      <li>
+                        <a href="auth/index.html?=#sign-up-container">Register</a>
+                      </li>
+                      <li>
+                        <a href="auth/index.html?=#sign-in-container">Login</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Content -->
+      <div class="header_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                <div class="logo_container">
+                  <a href="index.php">
+                    <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                      <div class="logo_img">
+                        <img src="images/logo.png" alt="eResult Logo" />
+                      </div>
+                      <div class="logo_text">Result</div>
+                    </div>
+                  </a>
+                </div>
+                <nav class="main_nav_contaner ml-auto">
+                  <ul class="main_nav">
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="dashboard.php">Dashboard</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="results/check.php">Check Result</a></li>
+                  </ul>
+                  <div class="search_button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </div>
+                  <div class="hamburger menu_mm">
+                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Search Panel -->
+      <div class="header_search_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+                <form action="search-results.php" method="get" class="header_search_form">
+                  <input type="search" class="search_input" name="query" placeholder="Search courses or results..."
+                    required="required" />
+                  <button class="header_search_button d-flex flex-column align-items-center justify-content-center">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu (unchanged structure) -->
+    <div class="menu d-flex flex-column align-items-end justify-content-end text-right menu_mm trans_400">
+      <div class="menu_close_container">
+        <div class="menu_close">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="search">
+        <form action="#" class="header_search_form menu_mm">
+          <input type="search" class="search_input menu_mm" placeholder="Search" />
+          <button class="header_search_button menu_mm"><i class="fa fa-search menu_mm"></i></button>
+        </form>
+      </div>
+      <nav class="menu_nav">
+        <ul class="menu_mm">
+          <li class="menu_mm"><a href="index.html">Home</a></li>
+          <li class="menu_mm"><a href="courses.html">Courses</a></li>
+          <li class="menu_mm"><a href="/php/dashboard.php">My Results</a></li>
+          <li class="menu_mm"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="menu_extra">
+        <div class="menu_phone"><span class="menu_title">phone:</span> +251 982 334 556</div>
+        <div class="menu_social"><span class="menu_title">follow us</span>
+          <ul>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home / Hero Section: focused on Result System -->
+    <div class="home">
+      <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
+          <!-- Slide 1: Student Result Viewing main -->
+          <div class="owl-item">
+            <div class="home_slider_background" style="background-image: url(images/index.jpg)"></div>
+            <div class="home_container">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="home_content text-center">
+                      <div class="home_logo"><img src="images/home_logo.png" alt="Result System" /></div>
+                      <div class="home_text">
+                        <div class="home_title">Student Result Viewing System</div>
+                        <div class="home_subtitle">Secure, real-time access to your academic performance. Check grades,
+                          transcripts, and semester results instantly.</div>
+                      </div>
+                      <div class="home_buttons">
+                        <div class="button home_button"><a href="#result-login-panel">Check Result Now <div
+                              class="button_arrow"><i class="fa fa-angle-right"></i></div></a></div>
+                        <div class="button home_button"><a href="about.html">Learn More <div class="button_arrow"><i
+                                class="fa fa-angle-right"></i></div></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2: quick login preview -->
+          <div class="owl-item">
+            <div class="home_slider_background" style="background-image: url(images/milestones.jpg)"></div>
+            <div class="home_container">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="home_content text-center">
+                      <div class="home_logo"><img src="images/home_logo.png" alt="" /></div>
+                      <div class="home_title">Paperless & Efficient</div>
+                      <div class="home_subtitle">View semester results, GPA, and detailed subject marks. Access
+                        anywhere, anytime.</div>
+                      <div class="home_buttons">
+                        <div class="button home_button"><a href="results/semester.php">View Sample Result <div
+                              class="button_arrow"><i class="fa fa-angle-right"></i></div></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Section: Result info integrated -->
+    <div class="featured">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="home_slider_nav_container d-flex flex-row align-items-start justify-content-between">
+              <div class="home_slider_nav home_slider_prev trans_200"><i class="fa fa-angle-left"></i></div>
+              <div class="home_slider_nav home_slider_next trans_200"><i class="fa fa-angle-right"></i></div>
+            </div>
+            <div class="featured_container">
+              <div class="row">
+                <div class="col-lg-6 featured_col">
+                  <div class="featured_content">
+                    <div class="featured_header d-flex flex-row align-items-center justify-content-start">
+                      <div class="featured_tag"><a href="#">Latest Results</a></div>
+                      <div class="featured_price ml-auto">Session: <span>2024/25</span></div>
+                    </div>
+                    <div class="featured_title">
+                      <h3><a href="#">Access your academic transcript</a></h3>
+                    </div>
+                    <div class="featured_text">
+                      <p>Our result portal provides real-time marks, automated GPA calculation, and printable result
+                        slips. Students can login using student ID and password to view internal assessments, final
+                        exams, and overall performance analytics.</p>
+                    </div>
+                    <div class="featured_footer d-flex align-items-center justify-content-start">
+                      <div class="featured_author_image"><img src="images/Lu.jpg" alt="admin" /></div>
+                      <div class="featured_author_name">By <a href="#">Registrar Office</a></div>
+                      <div class="featured_sales ml-auto"><span>1,240+</span> Students active</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 featured_col">
+                  <div class="featured_background" style="background-image: url(images/featured.jpg)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === LOGIN / RESULT CHECK PANEL (Student result access core) === -->
+    <div class="courses" id="result-login-panel">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="section_title text-center">
+              <h2>Access Your Results</h2>
+            </div>
+            <div class="section_subtitle text-center mb-4">Secure student portal — enter credentials to view marks</div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="login-card">
+              <form action="php/verify_student.php" method="POST" id="studentLoginForm">
+                <div class="form-group">
+                  <label><i class="fa fa-id-card"></i> Student ID / Registration No.</label>
+                  <input type="text" name="student_id" class="form-control" placeholder="e.g., STU1001 or email"
+                    required>
+                </div>
+                <div class="form-group">
+                  <label><i class="fa fa-lock"></i> Password / PIN</label>
+                  <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                  <label><i class="fa fa-calendar"></i> Select Examination Term</label>
+                  <select name="exam_term" class="form-control">
+                    <option value="Mid_2024">Mid Semester 2025</option>
+                    <option value="Final_2024" selected>Final Examination 2025</option>
+                    <option value="Mid_2025">Mid Semester 2026</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-result-primary btn-block">View Result <i
+                    class="fa fa-arrow-right"></i></button>
+              </form>
+              <div class="alert alert-info mt-3 small">Demo: Use ID "STU1001" / pass "result123" to preview (PHP backend
+                required)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses / featured subject results demo -->
+    <div class="courses">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <div class="section_title text-center">
+              <h2>Recent Academic Performance</h2>
+            </div>
+            <div class="section_subtitle text-center">Check sample result overview – integrated GPA system</div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="result-card-placeholder">
+              <div class="result-badge"><i class="fa fa-graduation-cap"></i> Computer Science – Final Year</div>
+              <h5>Student: Aman Getachew <span class="grade-highlight pull-right">CGPA: 3.68</span></h5>
+              <table class="table table-sm table-bordered mt-3">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Course</th>
+                    <th>Credit Hrs</th>
+                    <th>Grade</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Web Technologies</td>
+                    <td>4</td>
+                    <td>A</td>
+                    <td>16.0</td>
+                  </tr>
+                  <tr>
+                    <td>Database Systems</td>
+                    <td>4</td>
+                    <td>B+</td>
+                    <td>13.2</td>
+                  </tr>
+                  <tr>
+                    <td>Software Engineering</td>
+                    <td>3</td>
+                    <td>A-</td>
+                    <td>11.1</td>
+                  </tr>
+                  <tr>
+                    <td>Data Structures</td>
+                    <td>4</td>
+                    <td>B</td>
+                    <td>12.0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-right"><strong>Semester GPA: 3.52</strong></div>
+              <a href="#" class="btn btn-sm btn-outline-success mt-2"><i class="fa fa-print"></i> Download Result
+                Slip</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="result-card-placeholder">
+              <div class="result-badge"><i class="fa fa-chart-line"></i> Result Analytics</div>
+              <p>Our dynamic result system allows students to track performance trends across semesters, subject wise
+                percentage, and rank within department. After login, graphical charts are generated automatically.</p>
+              <div class="progress mt-3">
+                <div class="progress-bar bg-success" style="width:78%">78% Avg attendance</div>
+              </div>
+              <div class="progress mt-2">
+                <div class="progress-bar bg-info" style="width:85%">85% Aggregate Score</div>
+              </div>
+              <div class="mt-3"><i class="fa fa-envelope"></i> Notifications: result published alert via email/SMS.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestones: result usage stats -->
+    <div class="milestones">
+      <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/milestones.jpg"
+        data-speed="0.8"></div>
+      <div class="container">
+        <div class="row milestones_container">
+          <div class="col-lg-3 milestone_col">
+            <div class="milestone text-center">
+              <div class="milestone_icon"><img src="images/milestone_1.svg" alt="" /></div>
+              <div class="milestone_counter" data-end-value="2489">0</div>
+              <div class="milestone_text">Results Published</div>
+            </div>
+          </div>
+          <div class="col-lg-3 milestone_col">
+            <div class="milestone text-center">
+              <div class="milestone_icon"><img src="images/milestone_2.svg" alt="" /></div>
+              <div class="milestone_counter" data-end-value="5620">0</div>
+              <div class="milestone_text">Active Students</div>
+            </div>
+          </div>
+          <div class="col-lg-3 milestone_col">
+            <div class="milestone text-center">
+              <div class="milestone_icon"><img src="images/milestone_3.svg" alt="" /></div>
+              <div class="milestone_counter" data-end-value="124">0</div>
+              <div class="milestone_text">Programs</div>
+            </div>
+          </div>
+          <div class="col-lg-3 milestone_col">
+            <div class="milestone text-center">
+              <div class="milestone_icon"><img src="images/milestone_4.svg" alt="" /></div>
+              <div class="milestone_counter" data-end-value="100">0</div>
+              <div class="milestone_text">% Online Access</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services / how result system works -->
+    <div class="grouped_sections">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 grouped_col">
+            <div class="grouped_title">How Result View System Works?</div>
+            <div class="accordions">
+              <div class="accordion_container">
+                <div class="accordion d-flex flex-row align-items-center active">
+                  <div>1. Login with student ID</div>
+                </div>
+                <div class="accordion_panel">
+                  <div>
+                    <p>Each enrolled student receives unique ID and password. Secure authentication using encrypted
+                      database.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion_container">
+                <div class="accordion d-flex flex-row align-items-center">
+                  <div>2. Select semester / exam type</div>
+                </div>
+                <div class="accordion_panel">
+                  <div>
+                    <p>Choose from available terms: mid-semester, final, or supplementary examination results.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion_container">
+                <div class="accordion d-flex flex-row align-items-center">
+                  <div>3. Instant marks & GPA analysis</div>
+                </div>
+                <div class="accordion_panel">
+                  <div>
+                    <p>View subject-wise grades, credit points, total percentage, and cumulative GPA.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion_container">
+                <div class="accordion d-flex flex-row align-items-center">
+                  <div>4. Print & share digitally</div>
+                </div>
+                <div class="accordion_panel">
+                  <div>
+                    <p>Download result sheet as PDF / print directly from portal or share via secure link.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Upcoming result schedule -->
+          <div class="col-lg-4 grouped_col">
+            <div class="grouped_title">Result Announcements</div>
+            <div class="events">
+              <div class="event d-flex flex-row align-items-start justify-content-start">
+                <div>
+                  <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">15</div>
+                    <div class="event_month">May</div>
+                  </div>
+                </div>
+                <div class="event_body">
+                  <div class="event_title"><a href="#">Final Year Result Release</a></div>
+                  <div class="event_subtitle">All departments | Online viewing starts</div>
+                </div>
+              </div>
+              <div class="event d-flex flex-row align-items-start justify-content-start">
+                <div>
+                  <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">28</div>
+                    <div class="event_month">May</div>
+                  </div>
+                </div>
+                <div class="event_body">
+                  <div class="event_title"><a href="#">Remedial Examinations Results</a></div>
+                  <div class="event_subtitle">Available after 3:00 PM</div>
+                </div>
+              </div>
+              <div class="event d-flex flex-row align-items-start justify-content-start">
+                <div>
+                  <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                    <div class="event_day">10</div>
+                    <div class="event_month">June</div>
+                  </div>
+                </div>
+                <div class="event_body">
+                  <div class="event_title"><a href="#">Mid-Semester Result Preview</a></div>
+                  <div class="event_subtitle">For all undergraduate programs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Latest news & system updates -->
+          <div class="col-lg-4 grouped_col">
+            <div class="grouped_title">System Updates</div>
+            <div class="news">
+              <div class="news_post d-flex flex-row align-items-start justify-content-start">
+                <div>
+                  <div class="news_post_image"><img src="images/news_1.jpg" alt="" /></div>
+                </div>
+                <div class="news_post_body">
+                  <div class="news_post_date">April 28, 2025</div>
+                  <div class="news_post_title"><a href="#">New Result Analytics Dashboard launched</a></div>
+                  <div class="news_post_author">By <a href="#">Registrar</a></div>
+                </div>
+              </div>
+              <div class="news_post d-flex flex-row align-items-start justify-content-start">
+                <div>
+                  <div class="news_post_image"><img src="images/news_2.jpg" alt="" /></div>
+                </div>
+                <div class="news_post_body">
+                  <div class="news_post_date">April 20, 2025</div>
+                  <div class="news_post_title"><a href="#">Mobile App for Result View now available</a></div>
+                  <div class="news_post_author">By <a href="#">ICT Team</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video tutorial: how to view results -->
+    <div class="video">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="video_container_outer">
+              <div class="video_container">
+                <video id="vid1" class="video-js vjs-default-skin" controls
+                  data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://youtu.be/5_MRXyYjHDk"}], "youtube": { "iv_load_policy": 1 } }'></video>
+              </div>
+              <p class="text-center mt-3">🎓 Tutorial: How to Check Your Semester Results Online</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Join CTA to register -->
+    <div class="join">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <div class="section_title text-center">
+              <h2>Get Instant Access to Your Academic Records</h2>
+            </div>
+            <div class="section_subtitle text-center">Register now to unlock result tracking, transcripts & real-time
+              alerts.</div>
+          </div>
+        </div>
+      </div>
+      <div class="button join_button"><a href="auth/index.html?=sign-up-container">Register Now <div
+            class="button_arrow"><i class="fa fa-angle-right"></i></div></a></div>
+    </div>
+
+    <!-- Footer (adapted for result system) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 footer_col">
+            <div class="footer_about">
+              <div class="logo_container"><a href="#">
+                  <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                    <div class="logo_img"><img src="images/logo.png" alt="" /></div>
+                    <div class="logo_text">eResult</div>
+                  </div>
+                </a></div>
+              <div class="footer_about_text">
+                <p>Trusted Student Result Viewing System - Providing secure, real-time academic performance access for
+                  Ethiopian higher education.</p>
+              </div>
+              <div class="footer_social">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+              </div>
+              <div class="copyright">Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> eResult | <i class="fa fa-heart-o"></i> by
+                Lucky Tolosa
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 footer_col">
+            <div class="footer_links">
+              <div class="footer_title">Quick menu</div>
+              <ul class="footer_list">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="results.php">Result Check</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 footer_col">
+            <div class="footer_links">
+              <div class="footer_title">Student Resources</div>
+              <ul class="footer_list">
+                <li><a href="php/dashboard.php">Student Dashboard</a></li>
+                <li><a href="transcript.php">Transcript Request</a></li>
+                <li><a href="grade-calculator.html">GPA Calculator</a></li>
+                <li><a href="exam-schedule.html">Exam Schedule</a></li>
+                <li><a href="support.html">Support Ticket</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 footer_col">
+            <div class="footer_contact">
+              <div class="footer_title">Contact Support</div>
+              <div class="footer_contact_info">
+                <div class="footer_contact_item">
+                  <div class="footer_contact_title">Address:</div>
+                  <div class="footer_contact_line">Dil Ber, Addisu Gebeya, Addis Ababa</div>
+                </div>
+                <div class="footer_contact_item">
+                  <div class="footer_contact_title">Phone:</div>
+                  <div class="footer_contact_line">+251 992 092 392</div>
+                </div>
+                <div class="footer_contact_item">
+                  <div class="footer_contact_title">Email:</div>
+                  <div class="footer_contact_line">eresult@edu.et</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- scripts -->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="styles/bootstrap4/popper.js"></script>
+  <script src="styles/bootstrap4/bootstrap.min.js"></script>
+  <script src="plugins/greensock/TweenMax.min.js"></script>
+  <script src="plugins/greensock/TimelineMax.min.js"></script>
+  <script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+  <script src="plugins/greensock/animation.gsap.min.js"></script>
+  <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+  <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+  <script src="plugins/easing/easing.js"></script>
+  <script src="plugins/video-js/video.min.js"></script>
+  <script src="plugins/video-js/Youtube.min.js"></script>
+  <script src="plugins/parallax-js-master/parallax.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script>
+    // minor interactive for demo
+    $(document).ready(function () {
+      $('.milestone_counter').each(function () {
+        var $this = $(this);
+        var endVal = parseInt($this.data('end-value'));
+        if (!isNaN(endVal)) {
+          $this.text(endVal);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - eResult Student Result Viewing System</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Original Template Styles -->
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css" />
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="styles/main_styles.css" />
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+    
+    <style>
+        /* Contact Page Specific Styles - Matches dashboard theme */
+        .contact-wrapper {
+            margin-top: 151px;
+        }
+        
+        .page-banner {
+            background: linear-gradient(135deg, #2c2b31 0%, #ff8a00 100%);
+            padding: 60px 0;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+        }
+        
+        .page-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        
+        .page-banner h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-banner p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 0 80px;
+            background: #f8f9fc;
+        }
+        
+        .contact-info-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .contact-info-card h3 {
+            font-weight: 700;
+            color: #2c2b31;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 28px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #fff3e6;
+            color: #ff8a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-right: 18px;
+            flex-shrink: 0;
+        }
+        
+        .contact-icon.green {
+            background: #d4edda;
+            color: #28a745;
+        }
+        
+        .contact-icon.orange {
+            background: #fff3cd;
+            color: #ffc107;
+        }
+        
+        .contact-icon.purple {
+            background: #e8d5f5;
+            color: #6f42c1;
+        }
+        
+        .contact-text h5 {
+            font-weight: 700;
+            color: #2c2b31;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .contact-text p {
+            color: #918ea0;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .form-card h3 {
+            font-weight: 700;
+            color: #2c2b31;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #2c2b31;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #ff8a00;
+            box-shadow: 0 0 0 0.2rem rgba(255,138,0,0.15);
+            outline: none;
+        }
+        
+        .input-group-text {
+            background: #f8f9fc;
+            border: 1px solid #e0e0e0;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: #ff8a00;
+        }
+        
+        .input-group .form-control {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 130px;
+        }
+        
+        .btn-submit {
+            background: #ff8a00;
+            color: #fff;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            border: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            background: #ff6600;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,138,0,0.3);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0 0 60px;
+        }
+        
+        .map-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .map-placeholder {
+            background: linear-gradient(135deg, #2c2b31 0%, #43424a 100%);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #ff8a00;
+        }
+        
+        .map-placeholder p {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        /* Alert Messages */
+        .alert {
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Social Links */
+        .social-links {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .social-links h6 {
+            font-weight: 600;
+            color: #2c2b31;
+            margin-bottom: 12px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: #f8f9fc;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            color: #ff8a00;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: #ff8a00;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                margin-top: 120px;
+            }
+            
+            .page-banner {
+                padding: 40px 0;
+            }
+            
+            .page-banner h1 {
+                font-size: 28px;
+            }
+            
+            .contact-info-card,
+            .form-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-wrapper {
+                margin-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="super_container">
+    <!-- Header (matching dashboard) -->
+    <header class="header">
+        <!-- Top Bar -->
+        <div class="top_bar">
+            <div class="top_bar_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                <ul class="top_bar_contact_list">
+                                    <li><div class="question">Have any questions?</div></li>
+                                    <li><div>+251 11 241 3823</div></li>
+                                    <li><div>info@eresult.com</div></li>
+                                </ul>
+                                <div class="top_bar_login ml-auto">
+                                    <ul>
+                                        <li><a href="auth/index.html?=#sign-up-container">Register</a></li>
+                                        <li><a href="auth/index.html?=#sign-in-container">Login</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo_container">
+                                <a href="index.html">
+                                    <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                                        <div class="logo_img">
+                                            <img src="images/logo.png" alt="eResult Logo" />
+                                        </div>
+                                        <div class="logo_text">eResult</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <nav class="main_nav_contaner ml-auto">
+                                <ul class="main_nav">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="php/dashboard.php">Dashboard</a></li>
+                                    <li class="active"><a href="contact.html">Contact</a></li>
+                                </ul>
+                                <!-- Hamburger -->
+                                <div class="hamburger menu_mm">
+                                    <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Main Content -->
+    <div class="contact-wrapper">
+        <!-- Page Banner -->
+        <section class="page-banner">
+            <div class="container">
+                <h1><i class="fa fa-envelope"></i> Contact Us</h1>
+                <p>We're here to help with any questions about your results or the system</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                
+                <!-- Status Messages -->
+                <div id="statusAlert" style="display: none;">
+                    <div class="alert alert-success" id="successAlert">
+                        <i class="fa fa-check-circle"></i> 
+                        <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you within 24 hours.
+                    </div>
+                    <div class="alert alert-danger" id="errorAlert">
+                        <i class="fa fa-exclamation-circle"></i> 
+                        <strong>Oops!</strong> <span id="errorMessage"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Contact Info Column -->
+                    <div class="col-lg-5 mb-4">
+                        <div class="contact-info-card">
+                            <h3><i class="fa fa-address-card"></i> Get In Touch</h3>
+                            <p class="text-muted mb-4">
+                                Have questions about your results or need technical support? 
+                                Reach out to us through any of the channels below.
+                            </p>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-icon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Email Us</h5>
+                                    <p>info@eresult.com</p>
+                                    <p>support@eresult.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-icon green">
+                                    <i class="fa fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Call Us</h5>
+                                    <p>+251 11 241 3823</p>
+                                    <p>+251 91 234 5678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-icon orange">
+                                    <i class="fa fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Visit Us</h5>
+                                    <p>Gulele Sub City, Woreda 07</p>
+                                    <p>Addis Ababa, Ethiopia</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-icon purple">
+                                    <i class="fa fa-clock"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h5>Working Hours</h5>
+                                    <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                    <p>Saturday: 9:00 AM - 1:00 PM</p>
+                                    <p>Sunday: Closed</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Social Links -->
+                            <div class="social-links">
+                                <h6>Follow Us</h6>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fa fa-telegram-plane"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Column -->
+                    <div class="col-lg-7 mb-4">
+                        <div class="form-card">
+                            <h3><i class="fa fa-paper-plane"></i> Send Us a Message</h3>
+                            <form action="php/contact_handler.php" method="POST" id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Full Name *</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="name" name="name" 
+                                                       placeholder="Enter your full name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email Address *</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="email" class="form-control" id="email" name="email" 
+                                                       placeholder="Enter your email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Phone Number (Optional)</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-phone"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="tel" class="form-control" id="phone" name="phone" 
+                                                       placeholder="Enter your phone number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="student_id">Student ID (Optional)</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-id-card"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="student_id" name="student_id" 
+                                                       placeholder="e.g., STU/2024/001">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Subject *</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-tag"></i>
+                                            </span>
+                                        </div>
+                                        <select class="form-control" id="subject" name="subject" required>
+                                            <option value="">-- Select a topic --</option>
+                                            <option value="Result Inquiry">Result Inquiry</option>
+                                            <option value="Technical Support">Technical Support</option>
+                                            <option value="Account Issues">Account Issues</option>
+                                            <option value="Grade Discrepancy">Grade Discrepancy</option>
+                                            <option value="Transcript Request">Transcript Request</option>
+                                            <option value="General Question">General Question</option>
+                                            <option value="Feedback">Feedback / Suggestion</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Message *</label>
+                                    <textarea class="form-control" id="message" name="message" 
+                                              placeholder="Please describe your issue or question in detail..." 
+                                              rows="5" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-submit">
+                                    <i class="fa fa-paper-plane"></i> Send Message
+                                </button>
+                                
+                                <p class="text-muted small text-center mt-3 mb-0">
+                                    <i class="fa fa-lock"></i> Your information is secure and will not be shared.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="map-card">
+                    <div class="map-placeholder">
+                        <div>
+                            <i class="fa fa-map-marked-alt"></i>
+                            <h4>Our Location</h4>
+                            <p>Bole Sub City, Woreda 05, Addis Ababa, Ethiopia</p>
+                            <p class="small">
+                                <i class="fa fa-phone"></i> +251 11 241 3823 &nbsp;|&nbsp;
+                                <i class="fa fa-envelope"></i> info@eresult.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_about">
+                        <div class="logo_container">
+                            <a href="index.php">
+                                <div class="logo_content d-flex flex-row align-items-end justify-content-start">
+                                    <div class="logo_img"><img src="images/logo.png" alt=""></div>
+                                    <div class="logo_text">eResult</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="footer_about_text">
+                            <p>Student Result Viewing System - secure, fast, and reliable academic portal for Ethiopian students.</p>
+                        </div>
+                        <div class="copyright">
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_links">
+                        <div class="footer_title">Quick Links</div>
+                        <ul class="footer_list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="php/dashboard.php">Dashboard</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer_col">
+                    <div class="footer_contact">
+                        <div class="footer_title">Contact Info</div>
+                        <div class="footer_contact_info">
+                            <div class="footer_contact_item">
+                                <div class="footer_contact_title">Address:</div>
+                                <div class="footer_contact_line">Bole Sub City, Addis Ababa, Ethiopia</div>
+                            </div>
+                            <div class="footer_contact_item">
+                                <div class="footer_contact_title">Phone:</div>
+                                <div class="footer_contact_line">+251 11 241 3823</div>
+                            </div>
+                            <div class="footer_contact_item">
+                                <div class="footer_contact_title">Email:</div>
+                                <div class="footer_contact_line">info@eresult.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+
+<script>
+    // Check for status parameter in URL
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const msg = urlParams.get('msg');
+        
+        if (status === 'success') {
+            const alertDiv = document.getElementById('statusAlert');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            alertDiv.style.display = 'block';
+            successAlert.style.display = 'block';
+            errorAlert.style.display = 'none';
+            
+            // Clear form
+            document.getElementById('contactForm').reset();
+            
+            // Scroll to alert
+            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Auto-hide after 5 seconds
+            setTimeout(function() {
+                alertDiv.style.display = 'none';
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 5000);
+        } else if (status === 'error') {
+            const alertDiv = document.getElementById('statusAlert');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            alertDiv.style.display = 'block';
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'block';
+            errorMsg.textContent = decodeURIComponent(msg || 'Something went wrong. Please try again.');
+            
+            // Scroll to alert
+            alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Auto-hide after 6 seconds
+            setTimeout(function() {
+                alertDiv.style.display = 'none';
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 6000);
+        }
+    });
+</script>
+</body>
+</html>
